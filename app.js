@@ -1,12 +1,20 @@
+const contactsRouter = require("./routes/api/contacts");
 const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 
-const contactsRouter = require("./routes/api/contacts");
+const mongoose = require("mongoose");
+const DB_HOST =
+  "mongodb+srv://Yurii:C9j9w9pMk6YPMKuo@cluster0.oi1lbcz.mongodb.net/contacts-api?retryWrites=true&w=majority";
 
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
+
+mongoose
+  .connect(DB_HOST)
+  .then(() => console.log("Database connect success"))
+  .catch((error) => console.log(error.message));
 
 app.use(logger(formatsLogger));
 app.use(cors());
