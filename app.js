@@ -5,16 +5,16 @@ const cors = require("cors");
 
 const mongoose = require("mongoose");
 const DB_HOST =
-  "mongodb+srv://Yurii:C9j9w9pMk6YPMKuo@cluster0.oi1lbcz.mongodb.net/contacts-api?retryWrites=true&w=majority";
+  "mongodb+srv://Yurii:C9j9w9pMk6YPMKuo@cluster0.oi1lbcz.mongodb.net/db-contacts?retryWrites=true&w=majority";
+mongoose.set("strictQuery", true);
+mongoose
+  .connect(DB_HOST)
+  .then(() => console.log("Database connection successful"))
+  .catch((error) => console.log(error.message));
 
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
-
-mongoose
-  .connect(DB_HOST)
-  .then(() => console.log("Database connect success"))
-  .catch((error) => console.log(error.message));
 
 app.use(logger(formatsLogger));
 app.use(cors());
