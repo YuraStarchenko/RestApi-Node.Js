@@ -4,9 +4,11 @@ const logger = require("morgan");
 const cors = require("cors");
 
 const mongoose = require("mongoose");
-const DB_HOST =
-  "mongodb+srv://Yurii:C9j9w9pMk6YPMKuo@cluster0.oi1lbcz.mongodb.net/db-contacts?retryWrites=true&w=majority";
+
+const { DB_HOST } = require("./config");
+
 mongoose.set("strictQuery", true);
+
 mongoose
   .connect(DB_HOST)
   .then(() => console.log("Database connection successful"))
