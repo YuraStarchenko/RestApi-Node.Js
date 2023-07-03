@@ -3,9 +3,10 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 
-const mongoose = require("mongoose");
+require("dotenv").config();
+const { DB_HOST } = process.env;
 
-const { DB_HOST } = require("./config");
+const mongoose = require("mongoose");
 
 mongoose.set("strictQuery", true);
 
@@ -35,4 +36,3 @@ app.use((err, req, res, next) => {
 
 module.exports = app;
 
-// password mongoDB = C9j9w9pMk6YPMKuo;
