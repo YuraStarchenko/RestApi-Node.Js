@@ -24,27 +24,21 @@ const userSchema = new Schema(
       enum: ["starter", "pro", "business"],
       default: "starter",
     },
-
-    owner: {
-      type: Schema.Types.ObjectId,
-      ref: "user",
-    },
     token: String,
   },
-  { versionKey: false, timestamps: true }
+  { versionKey: false }
 );
 
 userSchema.post("save", handleMongooseError);
 
 const registerSchema = Joi.object({
   email: Joi.string().pattern(emailRegexp).required(),
-  password: Joi.string().min(6).required(),
-  subscription: Joi.string().valid("starter", "pro", "business").required(),
-  owner: Joi.string().required(),
+  password: Joi.string().email().min(6).required(),
+  subscription: Joi.string().valid("starter", "pro", "business"),
 });
 
 const loginSchema = Joi.object({
-  email: Joi.string().pattern(emailRegexp).required(),
+  email: Joi.string().email().pattern(emailRegexp).required(),
   password: Joi.string().min(6).required(),
 });
 

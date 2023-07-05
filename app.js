@@ -21,8 +21,8 @@ const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
 
-app.use("/api/contacts", contactsRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/contacts", contactsRouter);
 
 app.use(logger(formatsLogger));
 app.use(cors());
