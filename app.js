@@ -3,18 +3,6 @@ const express = require("express");
 const logger = require("morgan");
 const cors = require("cors");
 
-require("dotenv").config();
-const { DB_HOST } = process.env;
-
-const mongoose = require("mongoose");
-
-mongoose.set("strictQuery", true);
-
-mongoose
-  .connect(DB_HOST)
-  .then(() => console.log("Database connection successful"))
-  .catch((error) => console.log(error.message));
-
 const app = express();
 
 const formatsLogger = app.get("env") === "development" ? "dev" : "short";
@@ -35,4 +23,3 @@ app.use((err, req, res, next) => {
 });
 
 module.exports = app;
-
