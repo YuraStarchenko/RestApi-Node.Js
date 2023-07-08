@@ -26,7 +26,4 @@ const updateFavoriteSchema = Joi.object({
 
 const schemas = { addSchema, updateFavoriteSchema };
 
-module.exports = {
-  addSchema,
-  schemas,
-};
+module.exports = schemas;

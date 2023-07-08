@@ -8,6 +8,10 @@ const router = express.Router();
 
 const ctrl = require("../../controllers/authControllers");
 
-router.post("/register", validateBody(schemas.registerSchema), ctrl.register);
+router.post(
+  "/register",
+  validateBody(schemas.registerSchema),
+  ctrl.register
+);
 
 module.exports = router;
