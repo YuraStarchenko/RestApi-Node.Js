@@ -1,8 +1,11 @@
 const jwt = require("jsonwebtoken");
-const { HttpError } = require("../Helpers");
-const { User } = require("../models/user");
-const { Joi } = require("joi");
 
+const { HttpError } = require("../Helpers");
+
+const { User } = require("../models/user");
+
+const dotenv = require("dotenv");
+dotenv.config({ path: ".env.example" });
 const { SECRET_KEY } = process.env;
 
 const authenticate = async (req, res, next) => {
@@ -10,18 +13,18 @@ const authenticate = async (req, res, next) => {
   const [bearer, token] = authorization.split(" ");
 
   if (bearer !== "Bearer") {
-    return next(HttpError(401));
+    next(HttpError(401));
   }
 
   try {
     const { id } = jwt.verify(token, SECRET_KEY);
     const user = await User.findById(id);
     if (!user) {
-      return next(HttpError(401, "Not authorized"));
+      next(HttpError(401, "Not authorized"));
     }
-    req.user = user;
+    // req.user = user;
     next();
-  } catch (error) {
+  } catch {
     return next(HttpError(401));
   }
 };
